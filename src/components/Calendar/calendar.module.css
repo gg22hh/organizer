@@ -1,0 +1,109 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
+	padding-top: 20px;
+}
+
+.box {
+	padding: 10px;
+	border: 1px solid black;
+	border-radius: 8px;
+	max-width: 100px;
+	width: 100%;
+	text-align: center;
+}
+
+.box h3 {
+	font-weight: bold;
+}
+
+.calendar {
+	margin: 0 !important;
+}
+
+.date {
+	text-align: center;
+	font-size: 30px;
+}
+
+.list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	margin-bottom: 20px;
+}
+
+.item {
+	padding: 10px;
+	border-bottom: 1px solid lightgray;
+	gap: 20px;
+	align-items: center;
+}
+
+.itemHead {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+}
+
+.priority {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: red;
+}
+
+.actions {
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.add {
+	display: flex !important;
+	flex-direction: row;
+	align-items: center !important;
+	font-size: 16px !important;
+	margin: 0 auto !important;
+	color: black !important;
+	border-radius: 10px !important;
+}
+
+.redact {
+	padding: 20px 20px 10px 20px;
+	border-radius: 3px;
+	border: 1px solid lightgray;
+	border-top: unset;
+}
+
+.redact input, 
+.redact textarea { 
+	width: 100%;
+	outline: none;
+}
+
+/* .redactInfo {
+	padding-bottom: 20px;
+} */
+
+.redactInfo textarea {
+	font-size: 17px;
+	height: auto;
+}
+
+.redactActions {
+	padding-top: 10px;
+	border-top: 1px solid lightgray;
+	display: flex;
+	gap: 10px;
+	justify-content: end;
+}
+
+.error {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+} 
