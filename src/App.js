@@ -1,13 +1,18 @@
 import './App.css';
 import { Header } from './components/Header';
-import { Calendar } from './components/Calendar';
+import { Route, Routes } from 'react-router-dom';
+import { Main } from './pages/Main'
+import { Auth } from './pages/Auth';
 
 function App() {
   return (
     <>
       <Header />
       <div className="container">
-        <Calendar />
+        <Routes>
+          <Route path="/" element={<Auth />} />
+          <Route path="/organizer" element={<Main />} />
+        </Routes>
       </div>
     </>
   );
