@@ -40,6 +40,7 @@
 	border-bottom: 1px solid lightgray;
 	gap: 20px;
 	align-items: center;
+	position: relative;
 }
 
 .itemHead {
@@ -68,7 +69,6 @@
 	align-items: center !important;
 	font-size: 16px !important;
 	margin: 0 auto !important;
-	color: black !important;
 	border-radius: 10px !important;
 }
 
@@ -99,7 +99,7 @@
 	border-top: 1px solid lightgray;
 	display: flex;
 	gap: 10px;
-	justify-content: end;
+	justify-content: flex-end;
 }
 
 .error {
@@ -107,3 +107,47 @@
   bottom: 10px;
   right: 10px;
 } 
+
+.dueDate {
+	padding-left: 40px;
+}
+
+.description {
+	padding-left: 40px;
+	margin-bottom: 8px;
+}
+
+.bottom {
+	display: flex;
+	justify-content: space-between;
+}
+
+.done {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #0000007d;
+	z-index: 100;
+}
+
+.title {
+	font-size: 25px;
+	font-weight: 600;
+}
+
+.loading {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.sortItem {
+	display: flex;
+}

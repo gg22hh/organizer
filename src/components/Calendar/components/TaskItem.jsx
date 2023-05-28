@@ -1,28 +1,55 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import s from '../calendar.module.css';
-import { Button, Collapse, Dialog, DialogActions, DialogContent, DialogContentText, IconButton } from '@mui/material';
+import {
+  Button,
+  Checkbox,
+  Collapse,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  IconButton,
+} from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import autosize from '../../../resize';
 import { TaskForm } from './TaskForm';
-import { getColor } from '../../../utils/constants';
+import { getColor, monthes } from '../../../utils/constants';
+import dayjs from 'dayjs';
 
 export const TaskItem = ({
   title,
   description,
   pri,
   id,
+  date,
   updateTask,
-  deleteTask
+  deleteTask,
+  task,
+  done
 }) => {
   const [expanded, setExpanded] = useState(false);
   const [isRedact, setIsRedact] = useState(false);
   const [open, setOpen] = useState(false);
+  const [isDone, setIsDone] = useState(done)
+
+  console.log(done, 'done')
+
+  const colorForDate = new Date() > new Date(date) ? 'red' : '';
+
+  const updateTaskStatus = (e) => {
+    setIsDone(!isDone)
+    updateTask({...task, done: !done})
+  }
+
+  // useEffect(() => {
+  //   console.log(isDone, 'isDone')
+  // }, [isDone])
 
   const openModal = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   autosize(document.querySelectorAll('textarea'));
 
@@ -36,15 +63,17 @@ export const TaskItem = ({
           id={id}
           updateTask={updateTask}
           setIsRedact={setIsRedact}
+          date={date}
         />
       ) : (
         <div className={s.item}>
+          {done && <div className={s.done}></div>}
           <div className={s.itemHead}>
             <div
               className={s.priority}
               style={{ backgroundColor: getColor(pri) }}
             ></div>
-            <div className={s.info}>
+            <div style={{textDecoration: done ? 'line-through' : ''}}>
               <div>{title}</div>
             </div>
             <div className={s.actions}>
@@ -69,10 +98,16 @@ export const TaskItem = ({
               </IconButton>
             </div>
           </div>
-          <div>
+          <div className={s.description}>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <p>{description}</p>
             </Collapse>
+          </div>
+          <div className={s.bottom}>
+            <div className={s.dueDate} style={{ color: colorForDate }}>
+              {new Date(date).getDate()} {monthes[new Date(date).getMonth()]}
+            </div>
+            <Checkbox style={{zIndex: '101'}} checked={done} onChange={() => updateTaskStatus()} />
           </div>
           <Dialog
             open={open}

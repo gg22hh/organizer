@@ -11,9 +11,11 @@ import {
   MenuItem,
   Select,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import s from '../calendar.module.css';
 import { getColor } from '../../../utils/constants';
+import { DateTimePicker, dateCalendarClasses } from '@mui/x-date-pickers';
+import dayjs, { Dayjs } from 'dayjs';
 
 export const TaskForm = ({
   title = '',
@@ -25,11 +27,13 @@ export const TaskForm = ({
   isAdding = false,
   setIsAdding = () => {},
   addTask = () => {},
+  date = '',
 }) => {
   const [titleValue, setTitleValue] = useState(title);
   const [titleDesc, setTitleDesc] = useState(description);
   const [priValue, setPriValue] = useState(pri);
   const [error, setError] = useState(false);
+  const [dateValue, setDateValue] = useState(date);
 
   const cancelEdit = () => {
     if (!isAdding) {
@@ -47,10 +51,11 @@ export const TaskForm = ({
       title: titleValue,
       description: titleDesc,
       pri: priValue,
+      date: dateValue,
     };
     if (!titleValue) {
       setError(true);
-      return
+      return;
     }
     if (!isAdding) {
       setIsRedact(false);
@@ -80,9 +85,8 @@ export const TaskForm = ({
       </div>
       <div>
         <FormControl
-          variant="standard"
+          variant="outlined"
           sx={{ m: 1, minWidth: 120 }}
-          size="small"
         >
           <Select
             labelId="demo-select-small"
@@ -125,6 +129,10 @@ export const TaskForm = ({
             </MenuItem>
           </Select>
         </FormControl>
+        <DateTimePicker
+          value={dayjs(dateValue)}
+          onChange={(newValue) => setDateValue(newValue.toISOString())}
+        />
       </div>
       <div className={s.redactActions}>
         <Button size="small" variant="outlined" onClick={() => cancelEdit()}>
